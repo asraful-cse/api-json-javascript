@@ -1,4 +1,5 @@
 <!-- 24-4 :: JSON ,JSON structure parse stringify , JSON property -->
+<!--:24-5:Load data, JSON placeholder ,GET Display..: -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,16 @@
     <h2>javaScript Object Notation</h2>
 
 
-    <script>
+<!-- // :24-5: -->
+<ul id="user-container">
+
+</ul>
+<!-- // :24-5: -->
+
+
+    <!-- <script src="json.js"> -->
+        <script>
+//  24-4 :: JSON ,JSON structure parse stringify , JSON property
         const user = {
             id:2131,
             name:"fahim",
@@ -25,14 +35,14 @@
             friends:["kamal", "jamal", "samal"]       
         };
         const userJSON = JSON.stringify(user);
-        console.log(userJSON);          // object ke json string a convert kora jai.
+        //console.log(userJSON);          // object ke json string a convert kora jai.
 // output::
 // {"id":2131,"name":"fahim","lover":{"name":"jamila","favFood":"pizza"},"friendsAge":[12,33,44],"friends":["kamal","jamal","samal"]}
 // {
 
 
         const userFormJSON = JSON.parse(userJSON);
-        console.log(userFormJSON);     // object ke json string a convert kora jai.
+       // console.log(userFormJSON);     // object ke json string a convert kora jai.
    // output::
 // {
 //   id: 2131,
@@ -41,7 +51,28 @@
 //   friendsAge: [ 12, 33, 44 ],
 //   friends: [ 'kamal', 'jamal', 'samal' ]
 // }
+////  24-4 :End:
 
+
+
+// // :24-5:Load data, JSON placeholder ,GET Display..:
+fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayUser(json))
+            // .catch(error => console.log(error));    //error show show korar jonno//
+function displayUser(users) {
+    const userNames = users.map(user => user.username);
+    const ul = document.getElementById("user-container");
+
+    for (let i = 0; i < userNames.length; i++) {
+        const userName = userNames[i];
+        const li = document.createElement("li");
+        li.innerText = userName;
+        ul.appendChild(li);
+    }
+
+}
+// // //  24-5 :end:
     </script>
 </body>
 </html> 
